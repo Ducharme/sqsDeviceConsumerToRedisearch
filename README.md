@@ -2,8 +2,8 @@
 # Play with docker locally
 
 ```
-sudo docker build --tag sqsdeviceconsumer-toredisearch-js:v0.01 .
-sudo docker run -it sqsdeviceconsumer-toredisearch-js:v0.01
+sudo docker build --tag sqsdeviceconsumer-toredisearch:v0.01 .
+sudo docker run -it sqsdeviceconsumer-toredisearch:v0.01
 sudo docker logs da29d22cb82d
 ```
 

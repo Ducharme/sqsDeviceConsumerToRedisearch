@@ -22,8 +22,8 @@ async function processMessagesHandler(list: Promise<string>[]) {
 
 
 const run = async () => {
-  rec.connect();
-  rec.ping();
+  await rec.connect();
+  await rec.ping();
   sq.run<Promise<string>>();
 }
 
