@@ -65,7 +65,7 @@ export class redisClient {
         var topic = json.topic;
         var seq = json.seq;
 
-        var key : string = `DEVLOC:${deviceId}:${topic}`;
+        var key : string = `DEVLOC:${deviceId}:${topic}`; // TODO: Check if topic still contains '+'
         var payload1 = {
           'deviceId': deviceId, 'topic': topic,
           'lnglat': lnglat, 'lng': gps_lng, 'lat': gps_lat, 'alt': gps_alt,
@@ -80,7 +80,8 @@ export class redisClient {
         // BUG: In version 4.2.0 sending integer with fail with TypeError: Invalid argument type
         //var payload2 = {'dts': dev_ts, 'sts': srv_ts, 'wts': wrk_ts, 'rts': Date.now(), 'seq': seq};
         var payload2 = {'dts': dev_ts.toString(), 'sts': srv_ts.toString(),
-            'wts': wrk_ts.toString(), 'rts': Date.now().toString(), 'seq': seq.toString()};
+            'wts': wrk_ts.toString(), 'rts': Date.now().toString(), 'seq': seq.toString(),
+            'lng': gps_lng.toString(), 'lat': gps_lat.toString(), 'alt': gps_alt.toString(), 'h3r15': h3r15};
         
 
         let handleError1 = (error: any) => {
