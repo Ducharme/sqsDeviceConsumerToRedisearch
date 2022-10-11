@@ -35,6 +35,8 @@ export class redisClient {
     public async saveDeviceLocation(jsonStr: string): Promise<string> {
         const json = JSON.parse(jsonStr);
         var deviceId = json.deviceId;
+        var streamId = json.streamId;
+        var state = json.state;
         var dev_ts = json.timestamp;
         var srv_ts = json.server_timestamp;
         var wrk_ts = Date.now();
@@ -65,9 +67,9 @@ export class redisClient {
         var topic = json.topic;
         var seq = json.seq;
 
-        var key : string = `DEVLOC:${deviceId}:${topic}`; // TODO: Check if topic still contains '+'
+        var key : string = `DEVLOC:${deviceId}:${topic}:${streamId}`; // TODO: Check if topic still contains '+'
         var payload1 = {
-          'deviceId': deviceId, 'topic': topic,
+          'deviceId': deviceId, 'streamId': streamId, 'topic': topic, 'state': state,
           'lnglat': lnglat, 'lng': gps_lng, 'lat': gps_lat, 'alt': gps_alt,
           'dts': dev_ts, 'sts': srv_ts, 'wts': wrk_ts, 'fv': fv, 'batt': batt, 'seq': seq,
           'h3r0': h3r0, 'h3r1': h3r1, 'h3r2': h3r2, 'h3r3': h3r3, 'h3r4': h3r4, 'h3r5': h3r5, 
@@ -80,7 +82,8 @@ export class redisClient {
         // BUG: In version 4.2.0 sending integer with fail with TypeError: Invalid argument type
         //var payload2 = {'dts': dev_ts, 'sts': srv_ts, 'wts': wrk_ts, 'rts': Date.now(), 'seq': seq};
         var payload2 = {'dts': dev_ts.toString(), 'sts': srv_ts.toString(),
-            'wts': wrk_ts.toString(), 'rts': Date.now().toString(), 'seq': seq.toString(),
+            'wts': wrk_ts.toString(), 'rts': Date.now().toString(),
+            'streamId': streamId, 'seq': seq.toString(), 'state': state,
             'lng': gps_lng.toString(), 'lat': gps_lat.toString(), 'alt': gps_alt.toString(), 'h3r15': h3r15};
         
 
