@@ -1,6 +1,6 @@
 {
     "name": "sqsdeviceconsumer-toredisearch",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "LaFleet - SQS Device Consumer writing to Redisearch in TypeScript",
     "homepage": "https://github.com/Ducharme/sqsdeviceconsumer-toredisearch",
     "keywords": [
@@ -21,15 +21,15 @@
         "start:docker:envvars": "sh start-docker-envvars.sh .env.production"
     },
     "dependencies": {
-        "@aws-sdk/client-sqs": "^3.131.0",
+        "@aws-sdk/client-sqs": "^3.186.0",
         "h3-js": "^3.7.2",
         "redis": "^4.2.0"
     },
     "devDependencies": {
-        "@aws-sdk/types": "^3.127.0",
-        "@types/node": "^14.14.31",
-        "@typescript-eslint/types": "4.31.0",
-        "typescript": "^4.7.4"
+        "@aws-sdk/types": "^3.186.0",
+        "@types/node": "^18.8.4",
+        "@typescript-eslint/types": "5.40.0",
+        "typescript": "^4.8.4"
     },
     "eslintConfig": {
         "parser": "@typescript-eslint/parser",
