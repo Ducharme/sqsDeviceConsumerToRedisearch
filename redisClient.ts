@@ -67,7 +67,7 @@ export class redisClient {
         var topic = json.topic;
         var seq = json.seq;
 
-        var key : string = `DEVLOC:${deviceId}:${topic}:${streamId}`; // TODO: Check if topic still contains '+'
+        var key : string = `DEVLOC:${deviceId}:${topic}`; // TODO: Check if topic still contains '+'
         var payload1 = {
           'deviceId': deviceId, 'streamId': streamId, 'topic': topic, 'state': state,
           'lnglat': lnglat, 'lng': gps_lng, 'lat': gps_lat, 'alt': gps_alt,
@@ -78,12 +78,11 @@ export class redisClient {
         };
 
         // "STREAMDEV:test-299212:lafleet/devices/location/+/streaming"
-        var sk = key.replace("DEVLOC", "STREAMDEV");
+        var sk = key.replace("DEVLOC", "STREAMDEV") + ":" + streamId;
         // BUG: In version 4.2.0 sending integer with fail with TypeError: Invalid argument type
         //var payload2 = {'dts': dev_ts, 'sts': srv_ts, 'wts': wrk_ts, 'rts': Date.now(), 'seq': seq};
         var payload2 = {'dts': dev_ts.toString(), 'sts': srv_ts.toString(),
-            'wts': wrk_ts.toString(), 'rts': Date.now().toString(),
-            'streamId': streamId, 'seq': seq.toString(), 'state': state,
+            'wts': wrk_ts.toString(), 'rts': Date.now().toString(), 'seq': seq.toString(), 'state': state,
             'lng': gps_lng.toString(), 'lat': gps_lat.toString(), 'alt': gps_alt.toString(), 'h3r15': h3r15};
         
 
