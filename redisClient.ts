@@ -89,7 +89,7 @@ export class redisClient {
             };
 
             // "STREAMDEV:client-19797601:lafleet/devices/location/+/streaming"
-            var sk = key.replace("DEVLOC", "STREAMDEV");
+            var sk = key.replace("DEVLOC", "STREAMDEV") + ":" + streamId;
             // BUG: In version 4.2.0+ sending integer with fail with TypeError: Invalid argument type
             // For payload2 fields should have their .toString() removed when bug is fixed
             var payload2 = {'streamId': streamId.toString(), 'state': state, 'dts': dev_ts.toString(), 'sts': srv_ts.toString(),
